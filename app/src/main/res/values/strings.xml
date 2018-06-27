@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GetThroughApp</string>
+    <string name="usern">Enter Username</string>
+    <string name="passw">Enter Password</string>
+    <string name="regisUs">Register</string>
+    <string-array name="dailyQuotes">
+        <item>Quote1</item>
+        <item>Quote2</item>
+        <item>Quote3</item>
+        <item>Quote4</item>
+        <item>Quote5</item>
+    </string-array>
+</resources>

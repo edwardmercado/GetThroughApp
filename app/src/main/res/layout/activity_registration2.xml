@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imgView"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp"
+                app:civ_border_color="@color/cardview_light_background"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Image"
+                android:id="@+id/btnChoose"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User Information"
+                android:textStyle="bold"
+                android:layout_marginBottom="5sp"
+                />
+
+            <EditText
+                android:id="@+id/txtLname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:inputType="textCapWords" />
+
+            <!--firstname, middle name-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/txtFname"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/txtMI"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:hint="MI"
+                    android:inputType="textCapWords" />
+
+            </LinearLayout>
+            <!--continuation-->
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/txtBirthday"
+                android:clickable="true"
+                android:editable="false"
+                android:hint="Birthdate"
+                android:focusable="false"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Gender"
+                android:textStyle="bold"
+                android:layout_marginBottom="5sp"
+                />
+            <!--gender-->
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:id="@+id/rbtnMale"
+                    android:onClick="genderClick"
+
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:id="@+id/rbtnFemale"
+                    android:onClick="genderClick"
+                    />
+            </RadioGroup>
+            <!--end of gender-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User Address"
+                android:textStyle="bold"
+                android:layout_marginBottom="5sp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtStreet"
+                android:inputType="textCapWords"
+                android:hint="Enter Street"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCity"
+                android:hint="Enter City"
+                android:inputType="textCapWords"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProv"
+                android:hint="Enter Province"
+                android:inputType="textCapWords"
+                />
+
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Upload Information" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

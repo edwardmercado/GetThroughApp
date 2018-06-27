@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "535133295176",
+    "firebase_url": "https://getthroughapp-22002.firebaseio.com",
+    "project_id": "getthroughapp-22002",
+    "storage_bucket": "getthroughapp-22002.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535133295176:android:6f90169ca6b24690",
+        "android_client_info": {
+          "package_name": "com.example.user.getthroughapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535133295176-29get0alnbf7nigbkna62god24v7nv1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.getthroughapp",
+            "certificate_hash": "f07a661d06d2a2da257a166bc519dea63c55db2d"
+          }
+        },
+        {
+          "client_id": "535133295176-af76l0daeno1sg4af2l5qd8ol3uubsd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADVlpga-NSE2H7ap3-F1hg2ITgfFS66vI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535133295176-af76l0daeno1sg4af2l5qd8ol3uubsd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
