@@ -10,12 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter Your Personal Information"
+                android:textStyle="bold"
+                android:layout_marginTop="20sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="These details will serve as your virtual persona in this mobile application"
+                />
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -46,48 +63,67 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="5sp"
                 />
-
-            <EditText
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtLname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:inputType="textCapWords" />
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:inputType="textCapWords" />
 
-            <!--firstname, middle name-->
+            </android.support.design.widget.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/txtFname"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="0.7"
-                    android:layout_height="wrap_content"
-                    android:hint="First Name"
-                    android:inputType="textCapWords" />
-
-                <EditText
-                    android:id="@+id/txtMI"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="0.3"
-                    android:layout_height="wrap_content"
-                    android:hint="MI"
-                    android:inputType="textCapWords" />
-
-            </LinearLayout>
-            <!--continuation-->
-
-            <EditText
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtFname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    >
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:inputType="textCapWords" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtMI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    >
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="M.I"
+                        android:inputType="textCapCharacters" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtBirthday"
-                android:clickable="true"
-                android:editable="false"
-                android:hint="Birthdate"
-                android:focusable="false"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:hint="Birthdate"
+                    android:focusable="false" />
+            </android.support.design.widget.TextInputLayout>
 
 
             <TextView
@@ -131,42 +167,79 @@
                 android:layout_marginBottom="5sp"
                 />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtStreet"
-                android:inputType="textCapWords"
-                android:hint="Enter Street"
-                />
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:hint="Enter Street" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtCity"
-                android:hint="Enter City"
-                android:inputType="textCapWords"
-                />
-
-            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:hint="Enter City" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/txtProv"
-                android:hint="Enter Province"
-                android:inputType="textCapWords"
-                />
-
-
-            <Button
-                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Upload Information" />
+                android:layout_weight="0.7"
+                android:layout_marginBottom="50sp"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:hint="Enter Province" />
+            </android.support.design.widget.TextInputLayout>
 
+            <!--<EditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/txtProv"-->
+                <!--android:hint="Enter Province"-->
+                <!--android:inputType="textCapWords"-->
+                <!--/>-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnSave"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Upload Information" />-->
 
         </LinearLayout>
 
 
+
+
     </ScrollView>
+    <TextView
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:layout_alignParentBottom="true"
+        android:textColor="#fff"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:padding="10sp"
+        android:text="UPLOAD"
+        android:textStyle="bold" />
 
 </RelativeLayout>

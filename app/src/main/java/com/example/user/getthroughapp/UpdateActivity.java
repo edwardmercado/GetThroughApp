@@ -1,12 +1,17 @@
 package com.example.user.getthroughapp;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,10 +45,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpdateActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 234;
-    private Button btnLogout, btnBack, btnChoose, btnUpload,btnUpdate;
-    private TextView useremail;
+    private Button btnLogout, btnBack, btnChoose, btnUpload;
+    private TextView useremail, btnUpdate;
     private FirebaseAuth firebaseAuth;
-    private EditText txtusern, txtpassw, txtFname, txtLname, txtMI, txtemail, txtScrtAns, txtStreet, txtCity, txtProv, txtBirthday;
+    private TextInputLayout txtusern, txtpassw, txtFname, txtLname, txtMI, txtemail, txtScrtAns, txtStreet, txtCity, txtProv, txtBirthday;
     private Spinner spnScrtQues;
     private RadioButton rbtnMale, rbtnFemale;
     private ProgressDialog progressDialog;
@@ -53,11 +58,14 @@ public class UpdateActivity extends AppCompatActivity {
     private Uri filepath;
     private StorageReference storageReference;
     String profileImgUrl;
-    String isUserDetailed;
-    Calendar myCalendar = Calendar.getInstance();
     private CircleImageView imgProfilePic;
     private String id;
     String selectedGen;
+    private int year_x,month_x,day_x;
+    private String[] monthStr = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+    private static final int DIALOG_ID = 0;
+    private String sharedUri;
+    private Uri uriHolder;
 
     private DatabaseReference databaseReference;
 
@@ -65,11 +73,22 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
+        final Calendar cal = Calendar.getInstance();
+        year_x = cal.get(Calendar.YEAR);
+        month_x = cal.get(Calendar.MONTH);
+        day_x = cal.get(Calendar.DAY_OF_MONTH);
+
+        showDialogOnClick();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         storageReference = FirebaseStorage.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
 
         btnChoose = findViewById(R.id.btnChoose);
         imgProfilePic = findViewById(R.id.imgView);
+
 
 
         txtLname = findViewById(R.id.txtLname);
@@ -79,7 +98,6 @@ public class UpdateActivity extends AppCompatActivity {
         txtCity = findViewById(R.id.txtCity);
         txtProv = findViewById(R.id.txtProv);
 
-        btnBack = findViewById(R.id.btnBack);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnChoose = findViewById(R.id.btnChoose);
 
@@ -88,13 +106,12 @@ public class UpdateActivity extends AppCompatActivity {
         rbtnMale = findViewById(R.id.rbtnMale);
         rbtnFemale = findViewById(R.id.rbtnFemale);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
-            }
-        });
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor mEditor = mPreferences.edit();
+
+        String sharedUri = mPreferences.getString("keyUri","");
+        uriHolder = Uri.parse(sharedUri);
+        Toast.makeText(this,sharedUri,Toast.LENGTH_SHORT).show();
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,40 +121,47 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, dayOfMonth);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "MMMM/dd/yyyy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                txtBirthday.setText(sdf.format(myCalendar.getTime()));
-            }
-        };
+//        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                myCalendar.set(Calendar.YEAR, year);
+//                myCalendar.set(Calendar.MONTH, dayOfMonth);
+//                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//                String myFormat = "MMMM/dd/yyyy"; //In which you need put here
+//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//                txtBirthday.getEditText().setText(sdf.format(myCalendar.getTime()));
+//            }
+//        };
+//
+//        txtBirthday.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new DatePickerDialog(UpdateActivity.this, date, myCalendar
+//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//            }
+//        });
 
-        txtBirthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(UpdateActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
 
+        if(rbtnFemale.isSelected()){
+            selectedGen = "Female";
+        }
+        if(rbtnMale.isSelected()){
+            selectedGen = "Male";
+        }
 
         loadUserInfo();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String lname = txtLname.getText().toString().trim();
-                final String fname = txtFname.getText().toString().trim();
-                final String mname = txtMI.getText().toString().trim();
-                final String bday = txtBirthday.getText().toString().trim();
-                final String street = txtStreet.getText().toString().trim();
-                final String city = txtCity.getText().toString().trim();
-                final String prov = txtProv.getText().toString().trim();
+                final String lname = txtLname.getEditText().getText().toString().trim();
+                final String fname = txtFname.getEditText().getText().toString().trim();
+                final String mname = txtMI.getEditText().getText().toString().trim();
+                final String bday = txtBirthday.getEditText().getText().toString().trim();
+                final String street = txtStreet.getEditText().getText().toString().trim();
+                final String city = txtCity.getEditText().getText().toString().trim();
+                final String prov = txtProv.getEditText().getText().toString().trim();
 
                 if (TextUtils.isEmpty(lname)) {
                     txtLname.setError("Please enter first name");
@@ -242,6 +266,35 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
+    public void showDialogOnClick(){
+        txtBirthday = findViewById(R.id.txtBirthday);
+        txtBirthday.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(DIALOG_ID);
+            }
+        });
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id){
+        if(id == DIALOG_ID){
+            return new DatePickerDialog(this, dpickerListener, year_x,month_x,day_x);
+        }else{
+            return null;
+        }
+    }
+
+    private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            year_x = year;
+            month_x = month;
+            day_x = dayOfMonth;
+            txtBirthday.getEditText().setText(monthStr[month_x] + " " + day_x + ", " + year_x);
+        }
+    };
+
     public void genderClick(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -272,13 +325,29 @@ public class UpdateActivity extends AppCompatActivity {
         id = firebaseAuth.getCurrentUser().getUid();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference refProf = database.getReference(id).child("profielImgUrl");
+
+        refProf.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                String updateUser = dataSnapshot.getValue(String.class);
+                profileImgUrl = updateUser;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         DatabaseReference refFname = database.getReference(id).child("fname");
 
         refFname.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtFname.setText(updateUser);
+                txtFname.getEditText().setText(updateUser);
             }
 
             @Override
@@ -293,7 +362,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtLname.setText(updateUser);
+                txtLname.getEditText().setText(updateUser);
             }
 
             @Override
@@ -308,7 +377,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtMI.setText(updateUser);
+                txtMI.getEditText().setText(updateUser);
             }
 
             @Override
@@ -323,7 +392,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtBirthday.setText(updateUser);
+                txtBirthday.getEditText().setText(updateUser);
             }
 
             @Override
@@ -339,9 +408,11 @@ public class UpdateActivity extends AppCompatActivity {
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
                 if(updateUser.equals("Male")){
+                    selectedGen = "Male";
                     rbtnMale.setChecked(true);
                 }else{
                     rbtnFemale.setChecked(true);
+                    selectedGen = "Female";
                 }
             }
 
@@ -357,7 +428,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtStreet.setText(updateUser);
+                txtStreet.getEditText().setText(updateUser);
             }
 
             @Override
@@ -372,7 +443,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtCity.setText(updateUser);
+                txtCity.getEditText().setText(updateUser);
             }
 
             @Override
@@ -387,7 +458,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 String updateUser = dataSnapshot.getValue(String.class);
-                txtProv.setText(updateUser);
+                txtProv.getEditText().setText(updateUser);
             }
 
             @Override
@@ -422,7 +493,6 @@ public class UpdateActivity extends AppCompatActivity {
 
         if(requestCode==PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
-            Toast.makeText(this, ""+ filepath,Toast.LENGTH_SHORT).show();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
                 imgProfilePic.setImageBitmap(bitmap);

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -78,7 +83,6 @@ public class HomeActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,UpdateActivity.class));
-                finish();
             }
         });
     }
@@ -197,6 +201,36 @@ public class HomeActivity extends AppCompatActivity{
             Toast.makeText(this,"Please finish registraion first", Toast.LENGTH_SHORT).show();
         }
 
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+//        if(!user.isEmailVerified()){
+//            final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+//            alertBuilder.setMessage("Verify Email to explore more features on this app")
+//                    .setCancelable(false)
+//                    .setPositiveButton("Verify", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(final DialogInterface dialog, int which) {
+//                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    Toast.makeText(HomeActivity.this,"Email Verification Sent", Toast.LENGTH_SHORT).show();
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//                        }
+//                    })
+//                    .setNegativeButton("Later", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alert = alertBuilder.create();
+//            alert.setTitle("Email Verification");
+//            alert.show();
+//        }
+
         testQuote();
 
     }
@@ -249,18 +283,38 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     private void dailyQuotes(String quote){
-        final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage(quote)
-                .setCancelable(false)
-                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertBuilder.create();
-        alert.setTitle("Daily Motivational Quotes");
-        alert.show();
+//        final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+//        alertBuilder.setMessage(quote)
+//                .setCancelable(false)
+//                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//        AlertDialog alert = alertBuilder.create();
+//        alert.setTitle("Daily Motivational Quotes");
+//        alert.show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View v = LayoutInflater.from(HomeActivity.this).inflate(R.layout.daily_quotes_layout,null);
+        TextView quoteCon = v.findViewById(R.id.dailyQuotes);
+
+        quoteCon.setText(quote);
+
+        if(quote.length()>90)
+            quoteCon.setTextSize(15);
+
+        builder.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setView(v);
+        builder.show();
+
         showed=1;
     }
 

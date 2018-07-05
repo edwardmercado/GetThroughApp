@@ -3,9 +3,11 @@ package com.example.user.getthroughapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassword extends AppCompatActivity {
-    private Button btnBack, btnPassReset;
-    private EditText txtEmail;
+    private Button btnPassReset;
+    private TextInputLayout txtEmail;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -27,9 +29,10 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        btnBack = findViewById(R.id.btnBack);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         btnPassReset = findViewById(R.id.btnPassReset);
-        txtEmail = findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.txtemail);
         firebaseAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
@@ -37,9 +40,14 @@ public class ForgotPassword extends AppCompatActivity {
         btnPassReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userEmail = txtEmail.getText().toString().trim();
+                String userEmail = txtEmail.getEditText().getText().toString().trim();
                 if(TextUtils.isEmpty(userEmail)){
                     txtEmail.setError("Please enter email");
+                    return;
+                }
+                if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+                    txtEmail.setError("Invalid email");
+                    txtEmail.requestFocus();
                     return;
                 }
                 progressDialog.setMessage("Sending reset email");
@@ -63,12 +71,5 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
-            }
-        });
     }
 }

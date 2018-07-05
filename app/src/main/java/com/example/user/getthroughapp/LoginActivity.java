@@ -3,6 +3,7 @@ package com.example.user.getthroughapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
-    private EditText txtemail,txtpassw;
+    private TextInputLayout txtemail,txtpassw;
     private Button btnLogin, btnRegister;
     private ProgressDialog progressDialog;
     private TextView txtforgot;
@@ -41,17 +42,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtforgot = findViewById(R.id.txtForgot);
 
         btnLogin.setOnClickListener(this);
-        txtforgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         txtforgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
             }
         });
@@ -74,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void goRegister(View v){
         Intent i = new Intent(this,RegistrationActivity.class);
-        finish();
         startActivity(i);
     }
 
@@ -86,15 +79,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
-        String email = txtemail.getText().toString().trim();
-        String passw = txtpassw.getText().toString().trim();
+        String email = txtemail.getEditText().getText().toString().trim();
+        String passw = txtpassw.getEditText().getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            txtemail.setError("Please enter email");
+            txtemail.requestFocus();
             return;
         }
         if(TextUtils.isEmpty(passw)){
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            txtpassw.setError("Please enter password");
+            txtpassw.requestFocus();
             return;
         }
 

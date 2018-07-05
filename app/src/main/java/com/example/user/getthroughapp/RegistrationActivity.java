@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +47,7 @@ import java.util.Date;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnRegister;
-    private EditText txtemail, txtpass, txtconfirmpassw;
+    private TextInputLayout txtemail,txtpass, txtconfirmpassw;;
     private TextView linkSignin;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -67,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         btnRegister.setOnClickListener(this);
 
-        txtpass.addTextChangedListener(new TextWatcher() {
+        txtpass.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -96,33 +97,38 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
     }
     private void registerUser(){
-        String email = txtemail.getText().toString().trim();
-        String passw = txtpass.getText().toString().trim();
-        String confirmpassw = txtconfirmpassw.getText().toString().trim();
+        String email = txtemail.getEditText().getText().toString().trim();
+        String passw = txtpass.getEditText().getText().toString().trim();
+        String confirmpassw = txtconfirmpassw.getEditText().getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
+            txtemail.setError("Please enter email");
             txtemail.requestFocus();
             return;
         }
         if(passw.length() < 6){
-            Toast.makeText(this,"Password: Minimum of 6 characters",Toast.LENGTH_SHORT).show();
+            txtpass.setError("Password must be 6 letters or above");
             txtpass.requestFocus();
             return;
         }
         if(TextUtils.isEmpty(passw)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
+            txtpass.setError("Please enter password");
             txtpass.requestFocus();
             //Stopping the function executing more
             return;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(this,"Input valid email",Toast.LENGTH_SHORT).show();
+            txtemail.setError("Invalid email");
             txtemail.requestFocus();
             return;
         }
         if(!passw.equals(confirmpassw)){
-            Toast.makeText(this,"Password does not match",Toast.LENGTH_SHORT).show();
+            txtconfirmpassw.setError("Password does not match");
+            txtconfirmpassw.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(confirmpassw)){
+            txtconfirmpassw.setError("Please enter confirm password");
             txtconfirmpassw.requestFocus();
             return;
         }

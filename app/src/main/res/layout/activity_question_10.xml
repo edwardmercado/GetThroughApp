@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/screen10"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="20sp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="If you reported any problem,s how difficult have those problems made it for you to do your work, take care of things at home, or get along with other people?"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAlignment="center"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10sp"
+            android:padding="20sp"
+            >
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="@string/firstopt"
+                android:id="@+id/rbtnFirst"
+                android:onClick="answerClick"
+                android:textColor="@android:color/white"
+                android:buttonTint="@android:color/white"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="@string/secondopt"
+                android:id="@+id/rbtnSecond"
+                android:onClick="answerClick"
+                android:textColor="@android:color/white"
+                android:buttonTint="@android:color/white"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="@string/thirdopt"
+                android:id="@+id/rbtnThird"
+                android:onClick="answerClick"
+                android:textColor="@android:color/white"
+                android:buttonTint="@android:color/white"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="@string/fourthopt"
+                android:id="@+id/rbtnFourh"
+                android:onClick="answerClick"
+                android:textColor="@android:color/white"
+                android:buttonTint="@android:color/white"
+                />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

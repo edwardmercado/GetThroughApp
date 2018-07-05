@@ -1,7 +1,11 @@
 package com.example.user.getthroughapp;
 
+import android.net.Uri;
+
 public class User {
     public String fname,lname,mname,birthday,gender,street,city,province;
+    //public Uri filepath;
+
 
 
     public User(String fname, String lname, String mname,String birthday, String gender, String street, String city, String province) {
@@ -47,3 +51,5 @@ public class User {
     }
 
 }
+
+
