@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +18,6 @@ import android.view.View;
 import android.widget.*;
 
 import com.bumptech.glide.Glide;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,9 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -235,7 +228,7 @@ public class UpdateActivity extends AppCompatActivity {
                                         updateUser(lname, fname, mname, bday, selectedGen, street, city, prov);
                                         progressDialog.dismiss();
                                         finish();
-                                        startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
+                                        startActivity(new Intent(UpdateActivity.this, ProfileActivity.class));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -475,7 +468,7 @@ public class UpdateActivity extends AppCompatActivity {
         User user = new User(lname, fname, mname, bday, gender, street, city, prov);
         databaseReference.setValue(user);
         Toast.makeText(this,"User update successfull",Toast.LENGTH_SHORT).show();
-        //startActivity(new Intent(this, HomeActivity.class));
+        //startActivity(new Intent(this, ProfileActivity.class));
     }
 
 
@@ -490,7 +483,6 @@ public class UpdateActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode==PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data != null && data.getData() != null){
             filepath = data.getData();
             try {

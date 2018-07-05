@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:icon="@drawable/baseline_chat_black_24dp" />
+    <item android:icon="@drawable/baseline_alarm_black_24dp" />
+    <item android:icon="@drawable/baseline_insert_chart_outlined_black_24dp" />
+</menu>

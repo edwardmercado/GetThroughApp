@@ -7,6 +7,11 @@
     <string name="thirdopt">More than half a days</string>
     <string name="fourthopt">Nearly Everyday</string>
     <string name="regisUs">Register</string>
+    <string name="nav_chat">Chat</string>
+    <string name="nav_alarm">Alarm</string>
+    <string name="nav_depBar">Depression Bar</string>
+    <string name="nav_medSched">Medical Schedule</string>
+    <string name="nav_medAlarm">Medicine Schedule</string>
     <string-array name="dailyQuotes">
         <item>“Believe in yourself! Have faith in your abilities! Without a humble but reasonable confidence in your own powers you cannot be successful or happy.” \n —Norman Vincent Peale</item>
         <item>“If you can dream it, you can do it.” \n —Walt Disney</item>

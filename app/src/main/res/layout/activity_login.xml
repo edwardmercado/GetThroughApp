@@ -6,14 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+        android:background="@drawable/backgroundlogin"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_centerInParent="true"
+            android:foregroundGravity="center"
+            />
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="170sp"
         >
 
         <android.support.design.widget.TextInputLayout
@@ -25,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+
                 android:hint="Enter Email" />
         </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +76,7 @@
             android:text="FORGOT PASSWORD?" />
 
         <TextView
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -67,17 +84,19 @@
             android:text="OR" />
 
         <Button
-            android:layout_marginTop="30sp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
             android:layout_marginRight="30sp"
-            android:text="Register account"
+            android:text="CREATE NEW ACCOUNT"
             android:id="@+id/btnRegister"
             android:onClick="goRegister"
             />
 
     </LinearLayout>
+
+
 
 
 

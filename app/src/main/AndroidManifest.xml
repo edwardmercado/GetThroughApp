@@ -7,13 +7,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +27,12 @@
             android:name=".RegistrationActivity2"
             android:label="Personal Information" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ProfileActivity"
             android:label="Home" />
         <activity
             android:name=".UpdateActivity"
             android:label="Edit Details"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".ProfileActivity" />
         <activity
             android:name=".ForgotPassword"
             android:label="Account Recovery"
@@ -41,7 +40,8 @@
         <activity
             android:name=".MedSchedActivity"
             android:label="Medical Schedule" />
-        <activity android:name=".QuestionActivity"></activity>
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>

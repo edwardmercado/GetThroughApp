@@ -1,6 +1,5 @@
 package com.example.user.getthroughapp;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,7 +19,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -33,9 +31,6 @@ public class QuestionActivity extends AppCompatActivity {
     private Button btnNext;
     private RadioButton rbtnFirst,rbtnSecond,rbtnThird,rbtnFourth;
     private int btnCheckCtr;
-
-    public QuestionActivity() {
-    }
 
 
     @Override
