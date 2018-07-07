@@ -28,7 +28,7 @@
             android:label="Personal Information" />
         <activity
             android:name=".ProfileActivity"
-            android:label="Home" />
+            android:label="Profile" />
         <activity
             android:name=".UpdateActivity"
             android:label="Edit Details"
@@ -41,7 +41,8 @@
             android:name=".MedSchedActivity"
             android:label="Medical Schedule" />
         <activity android:name=".QuestionActivity" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity">
+        </activity>
     </application>
 
 </manifest>
