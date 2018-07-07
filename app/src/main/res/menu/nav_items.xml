@@ -2,7 +2,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:icon="@drawable/baseline_chat_black_24dp" />
-    <item android:icon="@drawable/baseline_alarm_black_24dp" />
-    <item android:icon="@drawable/baseline_insert_chart_outlined_black_24dp" />
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/baseline_chat_black_24dp"
+        android:title="@string/nav_chat" />
+    <item
+        android:id="@+id/nav_medSched"
+        android:icon="@drawable/baseline_alarm_black_24dp"
+        android:title="@string/nav_medAlarm" />
+    <item
+        android:id="@+id/nav_depBar"
+        android:icon="@drawable/baseline_insert_chart_outlined_black_24dp"
+        android:title="@string/nav_depBar" />
 </menu>

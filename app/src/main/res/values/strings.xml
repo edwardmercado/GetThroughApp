@@ -12,6 +12,9 @@
     <string name="nav_depBar">Depression Bar</string>
     <string name="nav_medSched">Medical Schedule</string>
     <string name="nav_medAlarm">Medicine Schedule</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string-array name="dailyQuotes">
         <item>“Believe in yourself! Have faith in your abilities! Without a humble but reasonable confidence in your own powers you cannot be successful or happy.” \n —Norman Vincent Peale</item>
         <item>“If you can dream it, you can do it.” \n —Walt Disney</item>
@@ -24,4 +27,7 @@
         <item>“There will be obstacles. There will be doubters. There will be mistakes. But with hard work, there are no limits.” \n —Michael Phelps</item>
         <item>“Keep your eyes on the stars, and your feet on the ground.” \n —Theodore Roosevelt</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

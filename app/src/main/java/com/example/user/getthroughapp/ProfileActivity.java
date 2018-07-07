@@ -40,8 +40,7 @@ public class ProfileActivity extends AppCompatActivity{
     private ProgressDialog progressDialog;
     private Button btnUpdate;
     private int showed = 0;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+
 
     String id;
     @Override
@@ -223,7 +222,6 @@ public class ProfileActivity extends AppCompatActivity{
 //            alert.show();
 //        }
 
-        testQuote();
 
     }
 
@@ -252,62 +250,7 @@ public class ProfileActivity extends AppCompatActivity{
 
 
 
-    private void dailyQuotes(String quote){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View v = LayoutInflater.from(ProfileActivity.this).inflate(R.layout.daily_quotes_layout,null);
-        TextView quoteCon = v.findViewById(R.id.dailyQuotes);
 
-        quoteCon.setText(quote);
-
-        if(quote.length()>90)
-            quoteCon.setTextSize(15);
-
-        builder.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.setView(v);
-        builder.show();
-
-        showed=1;
-    }
-
-    private void testQuote(){
-        Date now = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        int testTime = calendar.get(Calendar.HOUR_OF_DAY);
-        //Toast.makeText(this,testTime+"",Toast.LENGTH_LONG).show();
-        String[] arrayOfStrings = this.getResources().getStringArray(R.array.dailyQuotes);
-        String rndQuotes = arrayOfStrings[new Random().nextInt(arrayOfStrings.length)];
-
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = sharedPref.edit();
-        editor.putInt("dayPassed", 00);
-        editor.commit();
-
-
-        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mEditor = mPreferences.edit();
-
-        Boolean seen = mPreferences.getBoolean("isSeen", false);
-        int pass = mPreferences.getInt("dayPassed", 24);
-
-
-
-        if(seen.equals(false)){
-            dailyQuotes(rndQuotes);
-            editor.putBoolean("isSeen", true);
-            editor.commit();
-        }
-        if(pass==00){
-            editor.putBoolean("isSeen", false);
-            return;
-        }
-    }
 
 
 }
