@@ -27,11 +27,28 @@
                             <entry key="launcherLegacy">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
+                                      <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\User\Pictures\PAGAWA\logo.png" />
+                                      <entry key="imageAsset" value="C:\Users\User\Pictures\PAGAWA\backgroundLogin.jpg" />
+                                      <entry key="outputName" value="loginlayoutBG" />
                                     </map>
                                   </option>
                                 </PersistentState>

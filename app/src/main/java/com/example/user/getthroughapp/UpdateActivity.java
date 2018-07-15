@@ -228,7 +228,7 @@ public class UpdateActivity extends AppCompatActivity {
                                         updateUser(lname, fname, mname, bday, selectedGen, street, city, prov);
                                         progressDialog.dismiss();
                                         finish();
-                                        startActivity(new Intent(UpdateActivity.this, ProfileActivity.class));
+                                        startActivity(new Intent(UpdateActivity.this, HomeActivity.class));
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

@@ -24,16 +24,23 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
     private FirebaseAuth firebaseAuth;
+
+    private CircleImageView imgProfile;
+    private TextView txtFullname;
 
     private ChatFragment chatFragment;
     private AlarmFragment alarmFragment;
@@ -73,6 +80,18 @@ public class HomeActivity extends AppCompatActivity {
         if(savedInstanceState==null){
             setFragment(chatFragment);
         }
+
+        View v = navView.getHeaderView(0);
+        imgProfile = v.findViewById(R.id.imgPic);
+        txtFullname = v.findViewById(R.id.txtUsername);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        Glide.with(this)
+                .load(user.getPhotoUrl().toString())
+                .into(imgProfile);
+        String name = user.getDisplayName();
+        txtFullname.setText(name);
+
 
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -127,6 +146,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onStart() {
@@ -200,39 +220,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.show();
     }
 
-//    private void testQuote(){
-//        Date now = new Date();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(now);
-//        int testTime = calendar.get(Calendar.HOUR_OF_DAY);
-//        //Toast.makeText(this,testTime+"",Toast.LENGTH_LONG).show();
-//        String[] arrayOfStrings = this.getResources().getStringArray(R.array.dailyQuotes);
-//        String rndQuotes = arrayOfStrings[new Random().nextInt(arrayOfStrings.length)];
-//
-//        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        editor = sharedPref.edit();
-//        editor.putInt("dayPassed", 00);
-//        editor.commit();
-//
-//
-//        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        SharedPreferences.Editor mEditor = mPreferences.edit();
-//
-//        Boolean seen = mPreferences.getBoolean("isSeen", false);
-//        int pass = mPreferences.getInt("dayPassed", testTime);
-//
-//
-//
-//        if(seen.equals(false)){
-//            dailyQuotes(rndQuotes);
-//            editor.putBoolean("isSeen", true);
-//            editor.commit();
-//        }
-//        if(pass==00){
-//            editor.putBoolean("isSeen", false);
-//            return;
-//        }
-//    }
+
 
     public void Logout(){
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);

@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#008A83"
     tools:context=".LoginActivity">
 
     <RelativeLayout
+        android:id="@+id/picLayout"
         android:layout_width="match_parent"
-        android:layout_height="150sp"
-        android:background="@drawable/backgroundlogin"
-        >
+        android:background="@drawable/background"
+        android:layout_height="150sp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
             android:layout_centerInParent="true"
-            android:foregroundGravity="center"
             />
+
 
 
     </RelativeLayout>
@@ -29,7 +30,8 @@
         android:orientation="vertical"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="170sp"
+        android:layout_marginTop="30sp"
+        android:layout_below="@+id/picLayout"
         >
 
         <android.support.design.widget.TextInputLayout
